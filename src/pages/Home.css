@@ -46,7 +46,7 @@
 }
 
 .hero__copy {
-  max-width: 16ch;
+  max-width: 42rem;
 }
 
 .hero__brand {
@@ -59,6 +59,7 @@
 .hero__title {
   font-size: clamp(3.6rem, 9vw, 7.2rem);
   margin-bottom: 1.25rem;
+  max-width: 10ch;
 }
 
 .hero__lede {
@@ -72,6 +73,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+  align-items: center;
 }
 
 .hero__scroll {
@@ -470,9 +472,6 @@
     display: none;
   }
 
-  .hero__copy {
-    max-width: 20ch;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
