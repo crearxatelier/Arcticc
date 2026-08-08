@@ -1,0 +1,94 @@
+.contact-page {
+  padding-top: var(--nav-h);
+}
+
+.contact-hero {
+  padding: 4.5rem 0 2rem;
+}
+
+.contact-hero h1 {
+  font-size: clamp(3rem, 7vw, 5.2rem);
+  margin: 0.75rem 0 1rem;
+}
+
+.contact-hero p:last-child {
+  color: var(--slate);
+  max-width: 36ch;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2.5rem;
+  padding: 1rem 0 5.5rem;
+}
+
+.contact-form {
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem;
+  background:
+    radial-gradient(ellipse at top left, rgba(185, 154, 94, 0.1), transparent 45%),
+    #e9eeeb;
+}
+
+.contact-form label {
+  display: grid;
+  gap: 0.45rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--slate);
+}
+
+.contact-form input,
+.contact-form textarea {
+  font: inherit;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+  background: rgba(244, 246, 245, 0.85);
+  border: 1px solid transparent;
+  padding: 0.9rem 0.95rem;
+  outline: none;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: rgba(14, 17, 20, 0.25);
+}
+
+.contact-form__note {
+  color: var(--pine);
+  font-size: 0.95rem;
+}
+
+.contact-aside {
+  display: grid;
+  gap: 1.5rem;
+  align-content: start;
+  padding-top: 0.5rem;
+}
+
+.contact-aside h2 {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 0.4rem;
+}
+
+.contact-aside p,
+.contact-aside a {
+  color: var(--slate);
+}
+
+.contact-aside a:hover {
+  color: var(--ink);
+}
+
+@media (max-width: 900px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
