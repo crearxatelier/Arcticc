@@ -30,39 +30,47 @@ export function Header() {
   const inverted = isHome && !scrolled && !open
 
   return (
-    <header className={`site-header ${inverted ? 'is-invert' : ''} ${scrolled || open ? 'is-solid' : ''}`}>
-      <div className="site-header__inner container">
-        <Link to="/" className="brand" aria-label="ARCTICC home">
-          <img src="/brand/logo-mark.png" alt="" className="brand__mark" />
-          <span className="brand__word">ARCTICC</span>
-        </Link>
-
-        <nav className="site-nav" aria-label="Primary">
-          {products.map((p) => (
-            <NavLink key={p.id} to={`/products/${p.id}`} className="site-nav__link">
-              {p.name}
-            </NavLink>
-          ))}
-        </nav>
-
-        <div className="site-header__actions">
-          <Link to="/shop" className="header-shop">
-            Shop
+    <>
+      <header
+        className={`site-header ${inverted ? 'is-invert' : ''} ${scrolled || open ? 'is-solid' : ''} ${open ? 'is-menu-open' : ''}`}
+      >
+        <div className="site-header__inner container">
+          <Link to="/" className="brand" aria-label="ARCTICC home">
+            <img src="/brand/logo-mark.png" alt="" className="brand__mark" />
+            <span className="brand__word">ARCTICC</span>
           </Link>
-          <button
-            className={`menu-toggle ${open ? 'is-open' : ''}`}
-            aria-expanded={open}
-            aria-controls="site-menu"
-            onClick={() => setOpen((v) => !v)}
-          >
-            <span />
-            <span />
-            <span className="sr-only">Menu</span>
-          </button>
-        </div>
-      </div>
 
-      <div id="site-menu" className={`site-menu ${open ? 'is-open' : ''}`} hidden={!open}>
+          <nav className="site-nav" aria-label="Primary">
+            {products.map((p) => (
+              <NavLink key={p.id} to={`/products/${p.id}`} className="site-nav__link">
+                {p.name}
+              </NavLink>
+            ))}
+          </nav>
+
+          <div className="site-header__actions">
+            <Link to="/shop" className="header-shop">
+              Shop
+            </Link>
+            <button
+              className={`menu-toggle ${open ? 'is-open' : ''}`}
+              aria-expanded={open}
+              aria-controls="site-menu"
+              onClick={() => setOpen((v) => !v)}
+            >
+              <span />
+              <span />
+              <span className="sr-only">Menu</span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <div
+        id="site-menu"
+        className={`site-menu ${open ? 'is-open' : ''}`}
+        aria-hidden={!open}
+      >
         <div className="site-menu__panel container">
           <nav className="site-menu__nav">
             <Link to="/shop">Our Shop</Link>
@@ -85,6 +93,6 @@ export function Header() {
           <p className="site-menu__meta">Est. Canada · North Spirit</p>
         </div>
       </div>
-    </header>
+    </>
   )
 }
