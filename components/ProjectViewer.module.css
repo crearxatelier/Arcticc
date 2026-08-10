@@ -1,0 +1,126 @@
+.viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: 1rem;
+  background: rgba(247, 245, 240, 0.92);
+  backdrop-filter: blur(20px) saturate(120%);
+  -webkit-backdrop-filter: blur(20px) saturate(120%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.open {
+  pointer-events: auto;
+}
+
+.top,
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0.25rem;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.post {
+  font-family: var(--font-ui);
+  font-size: clamp(13px, 1vw, 15px);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.type {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.close,
+.navBtn {
+  min-height: 2.75rem;
+  padding: 0.55rem 1rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.42);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition:
+    background 0.35s var(--ease),
+    border-color 0.35s var(--ease),
+    transform 0.35s var(--ease);
+}
+
+.close:hover,
+.navBtn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.58);
+  border-color: rgba(239, 13, 13, 0.35);
+  transform: translateY(-1px);
+}
+
+.navBtn:disabled {
+  opacity: 0.35;
+}
+
+.stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  padding: 0.75rem 0;
+}
+
+.frame {
+  position: relative;
+  width: min(90vw, 48rem);
+  height: min(72svh, 56rem);
+  max-height: 72svh;
+}
+
+.image {
+  object-fit: contain !important;
+  width: 100%;
+  height: 100%;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.counter {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  min-width: 4.25rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .viewer {
+    padding: 1.5rem 2rem;
+  }
+
+  .frame {
+    width: min(70vw, 52rem);
+    height: min(78svh, 60rem);
+  }
+}
