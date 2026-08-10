@@ -1,0 +1,201 @@
+.series {
+  position: relative;
+  padding-block: var(--space-md) var(--space-lg);
+  overflow: hidden;
+}
+
+.intro {
+  display: grid;
+  gap: 0.75rem;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.label {
+  font-family: var(--font-ui);
+  font-size: clamp(11px, 0.85vw, 13px);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.support {
+  margin: 0;
+  max-width: 28rem;
+  color: var(--text-secondary);
+  font-size: clamp(15px, 1.1vw, 17px);
+}
+
+.stage {
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y;
+  cursor: grab;
+  margin-inline: calc(50% - 50vw);
+  width: 100vw;
+  padding-block: 0.5rem;
+}
+
+.stage:active {
+  cursor: grabbing;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  will-change: transform;
+  user-select: none;
+}
+
+.slide {
+  flex: 0 0 auto;
+  width: min(88vw, 28rem);
+  padding-inline: 0.65rem;
+  display: flex;
+  justify-content: center;
+  transition: opacity 0.55s var(--ease);
+}
+
+.slideInner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: rgba(21, 21, 21, 0.03);
+  transform-origin: center center;
+  transition: transform 0.55s var(--ease), opacity 0.55s var(--ease);
+  will-change: transform, opacity;
+}
+
+.slideButton {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  cursor: pointer;
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.25rem;
+  margin-top: 1.75rem;
+}
+
+.metaText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.postLabel {
+  font-family: var(--font-ui);
+  font-size: clamp(13px, 1vw, 15px);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.postType {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.counter {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  min-width: 4.5rem;
+}
+
+.progress {
+  position: relative;
+  width: min(100%, 12rem);
+  height: 1px;
+  background: var(--border);
+  margin-top: 1.25rem;
+  overflow: hidden;
+}
+
+.progressBar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 100%;
+  background: var(--accent);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.navBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.38);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.48);
+  font-size: 1.05rem;
+  line-height: 1;
+  transition:
+    background 0.35s var(--ease),
+    border-color 0.35s var(--ease),
+    transform 0.35s var(--ease);
+}
+
+.navBtn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(239, 13, 13, 0.35);
+  transform: translateY(-1px);
+}
+
+.navBtn:disabled {
+  opacity: 0.35;
+}
+
+@media (min-width: 768px) {
+  .slide {
+    width: min(62vw, 34rem);
+    padding-inline: 1rem;
+  }
+
+  .meta {
+    margin-top: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .slide {
+    width: min(58vw, 42rem);
+    padding-inline: 1.25rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .slide {
+    width: min(52vw, 46rem);
+  }
+}
