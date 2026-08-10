@@ -35,7 +35,6 @@ export function CarouselSeries({
   const id = useId();
   const { openViewer, setCursorActive } = usePortfolio();
   const [index, setIndex] = useState(0);
-  const [dragging, setDragging] = useState(false);
 
   const stageRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -44,14 +43,20 @@ export function CarouselSeries({
   const xRef = useRef(0);
   const dragRef = useRef({
     active: false,
+    moved: false,
     startX: 0,
     startOffset: 0,
     lastX: 0,
     lastTime: 0,
     velocity: 0,
+    pointerId: -1,
   });
   const animRef = useRef<gsap.core.Tween | null>(null);
   const reduced = useRef(false);
+  const suppressClickRef = useRef(false);
+  const indexRef = useRef(0);
+
+  indexRef.current = index;
 
   const getSlideWidth = useCallback(() => {
     const slide = slideRefs.current[0];
@@ -74,15 +79,17 @@ export function CarouselSeries({
     (active: number, immediate = false) => {
       slideRefs.current.forEach((slide, i) => {
         if (!slide) return;
+        const inner = slide.querySelector(`.${styles.slideInner}`) as HTMLElement | null;
+        const target = inner ?? slide;
         const distance = i - active;
         const scale = getNeighborScale(distance);
         const opacity = getNeighborOpacity(distance);
-        const y = distance === 0 ? 0 : 10;
+        const y = distance === 0 ? 0 : 8;
 
         if (immediate || reduced.current) {
-          gsap.set(slide, { scale, opacity, y });
+          gsap.set(target, { scale, opacity, y });
         } else {
-          gsap.to(slide, {
+          gsap.to(target, {
             scale,
             opacity,
             y,
@@ -94,9 +101,10 @@ export function CarouselSeries({
       });
 
       if (progressRef.current) {
-        const progress = projects.length <= 1 ? 1 : active / (projects.length - 1);
+        const progress =
+          projects.length <= 1 ? 1 : active / (projects.length - 1);
         gsap.to(progressRef.current, {
-          scaleX: progress || 0.08,
+          scaleX: Math.max(progress, 0.08),
           duration: reduced.current ? 0 : DURATION.carousel,
           ease: EASE.editorial,
         });
@@ -137,10 +145,22 @@ export function CarouselSeries({
 
   useEffect(() => {
     reduced.current = prefersReducedMotion();
-    const onResize = () => goTo(index, false);
-    goTo(0, false);
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
+    const stage = stageRef.current;
+    const sync = () => goTo(indexRef.current, false);
+
+    const raf = requestAnimationFrame(() => {
+      goTo(0, false);
+    });
+
+    window.addEventListener("resize", sync);
+    const ro = stage ? new ResizeObserver(sync) : null;
+    if (stage && ro) ro.observe(stage);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", sync);
+      ro?.disconnect();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -168,19 +188,21 @@ export function CarouselSeries({
 
   const onPointerDown = (e: React.PointerEvent) => {
     if (e.button !== 0) return;
-    const stage = stageRef.current;
-    if (!stage) return;
+    const target = e.target as HTMLElement;
+    if (target.closest("button") && !target.closest(`.${styles.slideButton}`)) {
+      return;
+    }
 
     animRef.current?.kill();
-    stage.setPointerCapture(e.pointerId);
-    setDragging(true);
     dragRef.current = {
       active: true,
+      moved: false,
       startX: e.clientX,
       startOffset: xRef.current,
       lastX: e.clientX,
       lastTime: performance.now(),
       velocity: 0,
+      pointerId: e.pointerId,
     };
   };
 
@@ -189,6 +211,13 @@ export function CarouselSeries({
     if (!drag.active) return;
 
     const delta = e.clientX - drag.startX;
+    if (!drag.moved && Math.abs(delta) < 8) return;
+
+    if (!drag.moved) {
+      drag.moved = true;
+      stageRef.current?.setPointerCapture(e.pointerId);
+    }
+
     const next = drag.startOffset + delta;
     xRef.current = next;
     gsap.set(trackRef.current, { x: next });
@@ -214,10 +243,21 @@ export function CarouselSeries({
     const drag = dragRef.current;
     if (!drag.active) return;
     drag.active = false;
-    setDragging(false);
 
     const stage = stageRef.current;
-    stage?.releasePointerCapture(e.pointerId);
+    if (drag.moved) {
+      stage?.releasePointerCapture(e.pointerId);
+    }
+
+    if (!drag.moved) {
+      // Pure click — leave navigation to the slide button handler
+      return;
+    }
+
+    suppressClickRef.current = true;
+    window.setTimeout(() => {
+      suppressClickRef.current = false;
+    }, 80);
 
     const width = getSlideWidth() || 1;
     const delta = e.clientX - drag.startX;
@@ -226,12 +266,9 @@ export function CarouselSeries({
 
     if (Math.abs(velocity) > 0.65 || Math.abs(delta) > width * 0.18) {
       next = delta < 0 || velocity < -0.65 ? index + 1 : index - 1;
-    } else {
-      const stageEl = stageRef.current;
-      if (stageEl) {
-        const center = stageEl.getBoundingClientRect().width / 2;
-        next = Math.round((center - xRef.current - width / 2) / width);
-      }
+    } else if (stage) {
+      const center = stage.getBoundingClientRect().width / 2;
+      next = Math.round((center - xRef.current - width / 2) / width);
     }
 
     goTo(next);
@@ -261,6 +298,7 @@ export function CarouselSeries({
         </div>
       </div>
 
+      <div className={styles.bleed}>
       <div
         ref={stageRef}
         className={styles.stage}
@@ -297,7 +335,7 @@ export function CarouselSeries({
                   onFocus={() => i === index && setCursorActive(true)}
                   onBlur={() => setCursorActive(false)}
                   onClick={(e) => {
-                    if (dragging) return;
+                    if (suppressClickRef.current) return;
                     if (i !== index) {
                       goTo(i);
                       return;
@@ -320,6 +358,7 @@ export function CarouselSeries({
             </div>
           ))}
         </div>
+      </div>
       </div>
 
       <div className="container">

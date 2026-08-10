@@ -35,31 +35,35 @@ export function ProjectViewer() {
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
+    const reduced = prefersReducedMotion();
 
     if (viewer.open && !wasOpen.current) {
       wasOpen.current = true;
       lockBodyScroll();
-      closeRef.current?.focus();
 
-      const reduced = prefersReducedMotion();
       const source = viewer.sourceEl?.querySelector("img") as HTMLElement | null;
       const target = frameRef.current?.querySelector("img") as HTMLElement | null;
 
+      gsap.killTweensOf(root);
       gsap.set(root, { autoAlpha: 1 });
 
       if (!reduced && source && target) {
-        const state = Flip.getState(source);
-        Flip.fit(target, state, { scale: true, absolute: true });
-        Flip.from(state, {
-          targets: target,
-          duration: DURATION.viewer,
-          ease: EASE.soft,
-          absolute: true,
-          scale: true,
-          onComplete: () => {
-            gsap.set(target, { clearProps: "all" });
-          },
-        });
+        try {
+          const state = Flip.getState(source);
+          Flip.from(state, {
+            targets: target,
+            duration: DURATION.viewer,
+            ease: EASE.soft,
+            absolute: true,
+            scale: true,
+          });
+        } catch {
+          gsap.fromTo(
+            target,
+            { opacity: 0, scale: 0.96 },
+            { opacity: 1, scale: 1, duration: DURATION.viewer, ease: EASE.soft }
+          );
+        }
       }
 
       gsap.fromTo(
@@ -70,10 +74,12 @@ export function ProjectViewer() {
           y: 0,
           duration: reduced ? 0.01 : 0.45,
           stagger: reduced ? 0 : 0.05,
-          delay: reduced ? 0 : 0.2,
+          delay: reduced ? 0 : 0.15,
           ease: EASE.editorial,
         }
       );
+
+      requestAnimationFrame(() => closeRef.current?.focus());
     }
 
     if (!viewer.open && wasOpen.current) {
@@ -81,7 +87,7 @@ export function ProjectViewer() {
       unlockBodyScroll();
       gsap.to(root, {
         autoAlpha: 0,
-        duration: prefersReducedMotion() ? 0.01 : 0.35,
+        duration: reduced ? 0.01 : 0.35,
         ease: EASE.editorial,
       });
       lastTriggerRef.current?.focus();
@@ -126,6 +132,7 @@ export function ProjectViewer() {
           className={styles.close}
           onClick={closeViewer}
           aria-label="Close project viewer"
+          tabIndex={viewer.open ? 0 : -1}
         >
           Close
         </button>
@@ -133,7 +140,7 @@ export function ProjectViewer() {
 
       <div className={styles.stage}>
         <div ref={frameRef} className={styles.frame}>
-          {project && (
+          {project && viewer.open && (
             <Image
               key={project.id}
               src={project.image}
@@ -154,6 +161,7 @@ export function ProjectViewer() {
           onClick={prevInViewer}
           disabled={viewer.index <= 0}
           aria-label="Previous project"
+          tabIndex={viewer.open ? 0 : -1}
         >
           Previous
         </button>
@@ -166,6 +174,7 @@ export function ProjectViewer() {
           onClick={nextInViewer}
           disabled={viewer.index >= projects.length - 1}
           aria-label="Next project"
+          tabIndex={viewer.open ? 0 : -1}
         >
           Next
         </button>

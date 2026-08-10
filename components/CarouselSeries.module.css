@@ -31,9 +31,18 @@
   overflow: hidden;
   touch-action: pan-y;
   cursor: grab;
-  margin-inline: calc(50% - 50vw);
-  width: 100vw;
+  width: 100%;
+  margin-inline: 0;
   padding-block: 0.5rem;
+}
+
+/* Break out of container for full-bleed carousel without causing page overflow */
+.bleed {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow: hidden;
 }
 
 .stage:active {

@@ -11,8 +11,8 @@
   --glass-border: rgba(255, 255, 255, 0.48);
   --glass-blur: 18px;
   --radius-glass: 20px;
-  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-  --font-ui: "Manrope", system-ui, sans-serif;
+  --font-display: var(--font-cormorant), Georgia, "Times New Roman", serif;
+  --font-ui: var(--font-manrope), system-ui, sans-serif;
   --space-xs: clamp(0.5rem, 1vw, 0.75rem);
   --space-sm: clamp(1rem, 2vw, 1.5rem);
   --space-md: clamp(2rem, 4vw, 3.5rem);
@@ -32,6 +32,7 @@
 html {
   scroll-behavior: auto;
   -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
 }
 
 html.lenis,
@@ -56,7 +57,7 @@ body {
   font-weight: 400;
   line-height: 1.6;
   background: var(--bg);
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -114,10 +115,10 @@ button:disabled {
   position: absolute;
   inset: -20%;
   background:
-    radial-gradient(45% 40% at 18% 22%, rgba(235, 216, 208, 0.72), transparent 70%),
-    radial-gradient(38% 36% at 82% 18%, rgba(243, 196, 190, 0.55), transparent 68%),
-    radial-gradient(50% 45% at 70% 78%, rgba(231, 224, 212, 0.8), transparent 72%),
-    radial-gradient(28% 28% at 30% 70%, rgba(239, 13, 13, 0.05), transparent 70%);
+    radial-gradient(45% 40% at 18% 22%, rgba(235, 216, 208, 0.55), transparent 70%),
+    radial-gradient(38% 36% at 82% 18%, rgba(243, 196, 190, 0.38), transparent 68%),
+    radial-gradient(50% 45% at 70% 78%, rgba(231, 224, 212, 0.65), transparent 72%),
+    radial-gradient(28% 28% at 30% 70%, rgba(239, 13, 13, 0.035), transparent 70%);
   animation: ambientDrift 16s ease-in-out infinite alternate;
   will-change: transform;
 }
@@ -155,15 +156,6 @@ button:disabled {
   .ambient__layer,
   .ambient__layer--soft {
     animation: none !important;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }
 

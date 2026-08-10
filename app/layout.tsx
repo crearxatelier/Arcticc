@@ -48,15 +48,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${manrope.variable} ${cormorant.variable}`}>
-      <body
-        style={
-          {
-            "--font-ui": "var(--font-manrope), system-ui, sans-serif",
-            "--font-display":
-              "var(--font-cormorant), Georgia, 'Times New Roman', serif",
-          } as React.CSSProperties
-        }
-      >
+      <body>
         <div className="ambient" aria-hidden="true">
           <div className="ambient__layer" />
           <div className="ambient__layer ambient__layer--soft" />
