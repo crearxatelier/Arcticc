@@ -102,6 +102,13 @@
   transform: scaleX(1);
 }
 
+.actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bag,
 .menuToggle {
   display: inline-flex;
   align-items: center;
@@ -121,6 +128,7 @@
   transition: background 0.35s var(--ease), border-color 0.35s var(--ease);
 }
 
+.bag:hover,
 .menuToggle:hover {
   background: rgba(255, 255, 255, 0.55);
   border-color: rgba(239, 13, 13, 0.3);
@@ -149,5 +157,9 @@
 
   .menuToggle {
     display: none;
+  }
+
+  .bag {
+    display: inline-flex;
   }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import styles from "./MobileMenu.module.css";
 import { lockBodyScroll, unlockBodyScroll, trapFocus } from "@/lib/focus";
 import { cn } from "@/lib/utils";
@@ -57,17 +58,29 @@ export function MobileMenu({ open, onClose, links }: MobileMenuProps) {
       </div>
 
       <nav className={styles.nav} aria-label="Mobile">
-        {links.map((link) => (
-          <a
-            key={link.href}
-            href={link.href}
-            className={styles.link}
-            tabIndex={open ? 0 : -1}
-            onClick={onClose}
-          >
-            {link.label}
-          </a>
-        ))}
+        {links.map((link) =>
+          link.href.startsWith("/#") ? (
+            <a
+              key={link.href}
+              href={link.href}
+              className={styles.link}
+              tabIndex={open ? 0 : -1}
+              onClick={onClose}
+            >
+              {link.label}
+            </a>
+          ) : (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={styles.link}
+              tabIndex={open ? 0 : -1}
+              onClick={onClose}
+            >
+              {link.label}
+            </Link>
+          )
+        )}
       </nav>
 
       <p className={styles.meta}>Social / Edited · Coimbatore</p>

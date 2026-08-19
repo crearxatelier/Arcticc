@@ -1,0 +1,53 @@
+.box {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.sizes {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.sizes span {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.size {
+  min-width: 3rem;
+  min-height: 2.75rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.active {
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--bg);
+}
+
+.error {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.95rem;
+}
+
+.sku {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}

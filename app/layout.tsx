@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { Providers } from "@/components/Providers";
+import { Navigation } from "@/components/Navigation";
+import { SiteFooter } from "@/components/SiteFooter";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -53,7 +56,13 @@ export default function RootLayout({
           <div className="ambient__layer" />
           <div className="ambient__layer ambient__layer--soft" />
         </div>
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          <Providers>
+            <Navigation />
+            {children}
+            <SiteFooter />
+          </Providers>
+        </SmoothScroll>
       </body>
     </html>
   );
