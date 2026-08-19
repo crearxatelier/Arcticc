@@ -90,6 +90,10 @@
   transition-delay: 0.2s;
 }
 
+.open .link:nth-child(4) {
+  transition-delay: 0.26s;
+}
+
 .link:hover,
 .link:focus-visible {
   color: var(--accent);
