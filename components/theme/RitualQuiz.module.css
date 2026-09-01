@@ -1,0 +1,42 @@
+.section {
+  position: relative;
+  min-height: min(68vh, 560px);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: var(--white);
+  text-align: center;
+}
+
+.bg {
+  object-fit: cover;
+  transform: scale(1.04);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 51, 41, 0.45) 0%,
+    rgba(15, 51, 41, 0.72) 100%
+  );
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  width: min(560px, calc(100% - 2.5rem));
+  animation: rise-in 0.8s var(--ease) both;
+}
+
+.content h2 {
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  margin: 0.55rem 0 0.85rem;
+}
+
+.content p {
+  max-width: 40ch;
+  margin: 0 auto 1.5rem;
+  color: rgba(255, 255, 255, 0.86);
+}

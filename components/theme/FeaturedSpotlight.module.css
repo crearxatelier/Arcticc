@@ -1,0 +1,86 @@
+.section {
+  background: var(--white);
+}
+
+.layout {
+  display: grid;
+  gap: 2rem;
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--paper-deep);
+  border-radius: var(--radius);
+}
+
+.media img {
+  object-fit: cover;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.copy h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin: 0.4rem 0 0.5rem;
+}
+
+.rating {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-bottom: 1rem;
+}
+
+.desc {
+  max-width: 42ch;
+  color: var(--ink-soft);
+  margin-bottom: 1.25rem;
+}
+
+.price {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  margin-bottom: 1.1rem;
+}
+
+.sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.sizes button {
+  min-width: 4.5rem;
+  min-height: 2.6rem;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.sizes .active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--white);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+@media (min-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 3rem;
+  }
+}

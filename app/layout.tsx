@@ -1,33 +1,36 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Manrope } from "next/font/google";
+import { Fraunces, Outfit } from "next/font/google";
 import "./globals.css";
-import { SmoothScroll } from "@/components/SmoothScroll";
+import { CartProvider } from "@/context/CartContext";
+import { SmoothScroll } from "@/lib/SmoothScroll";
+import { SiteHeader } from "@/components/theme/SiteHeader";
+import { SiteFooter } from "@/components/theme/SiteFooter";
+import { CartDrawer } from "@/components/theme/CartDrawer";
 
-const manrope = Manrope({
+const outfit = Outfit({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-manrope",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-outfit",
   display: "swap",
 });
 
-const cormorant = Cormorant_Garamond({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
-  variable: "--font-cormorant",
+  variable: "--font-fraunces",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://guna.design"),
-  title: "GUNA / VISUAL DESIGNER — Social & Visual Design",
+  metadataBase: new URL("https://rivulet.store"),
+  title: "Rivulet — Cold-pressed botanical tonics",
   description:
-    "Guna is a visual designer based in Coimbatore creating social media, graphic and visual communication work.",
+    "Rivulet is a Shopify-inspired wellness theme for cold-pressed botanicals, tonics, and food brands. Immersive storefronts with quiet conversion.",
   openGraph: {
-    title: "GUNA / VISUAL DESIGNER — Social & Visual Design",
+    title: "Rivulet — Cold-pressed botanical tonics",
     description:
-      "Guna is a visual designer based in Coimbatore creating social media, graphic and visual communication work.",
-    images: [{ url: "/og/og-default.webp", width: 1200, height: 630 }],
+      "A redesigned Shopify theme for wellness and food brands—immersive, botanical, conversion-minded.",
     type: "website",
   },
   icons: {
@@ -36,7 +39,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#F7F5F0",
+  themeColor: "#1a4d3e",
   width: "device-width",
   initialScale: 1,
 };
@@ -47,13 +50,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${manrope.variable} ${cormorant.variable}`}>
+    <html lang="en" className={`${outfit.variable} ${fraunces.variable}`}>
       <body>
-        <div className="ambient" aria-hidden="true">
-          <div className="ambient__layer" />
-          <div className="ambient__layer ambient__layer--soft" />
-        </div>
-        <SmoothScroll>{children}</SmoothScroll>
+        <CartProvider>
+          <SmoothScroll>
+            <SiteHeader />
+            <main>{children}</main>
+            <SiteFooter />
+            <CartDrawer />
+          </SmoothScroll>
+        </CartProvider>
       </body>
     </html>
   );

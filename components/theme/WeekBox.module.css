@@ -1,0 +1,146 @@
+.section {
+  padding-block: var(--space-lg);
+  background: var(--paper-deep);
+}
+
+.layout {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.panel {
+  background: var(--white);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border-radius: var(--radius);
+}
+
+.panel h2 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  margin: 0.4rem 0 0.75rem;
+}
+
+.lead {
+  color: var(--muted);
+  max-width: 42ch;
+  margin-bottom: 1.5rem;
+}
+
+.list {
+  display: grid;
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: auto 56px 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+.row.on {
+  border-color: var(--evergreen);
+  background: rgba(26, 77, 62, 0.04);
+}
+
+.row input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--evergreen);
+}
+
+.thumb {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--paper);
+}
+
+.thumb img {
+  object-fit: cover;
+}
+
+.info {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.info strong {
+  font-size: 0.92rem;
+}
+
+.info em {
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.price {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.totalLabel {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.total {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+}
+
+.visual {
+  position: relative;
+  min-height: 360px;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.visual img {
+  object-fit: cover;
+}
+
+@media (min-width: 960px) {
+  .layout {
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: stretch;
+  }
+
+  .visual {
+    min-height: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .row {
+    grid-template-columns: auto 48px 1fr;
+  }
+
+  .price {
+    grid-column: 3;
+    justify-self: start;
+  }
+}
