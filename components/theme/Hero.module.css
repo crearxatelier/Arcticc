@@ -91,15 +91,20 @@
 @media (max-width: 800px) {
   .hero {
     min-height: 88vh;
-    align-items: end;
+    align-items: flex-end;
+  }
+
+  .wash {
+    background:
+      linear-gradient(180deg, rgba(15, 51, 41, 0.2) 0%, rgba(15, 51, 41, 0.78) 58%, rgba(15, 51, 41, 0.88) 100%);
   }
 
   .productFloat {
-    width: min(46vw, 210px);
+    width: min(42vw, 190px);
     left: 1rem;
     bottom: auto;
-    top: 18%;
-    opacity: 0.95;
+    top: 14%;
+    opacity: 0.92;
   }
 
   .content {
@@ -108,6 +113,20 @@
   }
 
   .brand {
-    font-size: clamp(2.6rem, 12vw, 3.4rem);
+    font-size: clamp(2.9rem, 14vw, 3.8rem);
+  }
+
+  .content h1 {
+    font-size: clamp(1.85rem, 7.2vw, 2.35rem);
+    max-width: 18ch;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .actions :global(.btn) {
+    width: 100%;
   }
 }

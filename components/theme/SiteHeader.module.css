@@ -86,6 +86,22 @@
   line-height: 1;
 }
 
+@media (max-width: 899px) {
+  .inner {
+    grid-template-columns: auto 1fr;
+  }
+
+  .logo {
+    justify-self: start;
+    grid-column: 1;
+    font-size: 1.55rem;
+  }
+
+  .utils {
+    grid-column: 2;
+  }
+}
+
 .utils {
   display: flex;
   align-items: center;

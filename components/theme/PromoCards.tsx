@@ -8,7 +8,7 @@ export function PromoCards() {
       <div className={`container ${styles.grid}`}>
         <Link href="/collections?cat=recovery" className={styles.card}>
           <Image
-            src="https://images.unsplash.com/photo-1600271886742-f049cd7994ce?auto=format&fit=crop&w=1100&q=80"
+            src="https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&w=1100&q=80"
             alt=""
             fill
             sizes="(max-width: 800px) 100vw, 50vw"

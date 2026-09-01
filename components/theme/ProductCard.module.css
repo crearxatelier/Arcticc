@@ -40,6 +40,14 @@
   background: var(--danger);
 }
 
+.new {
+  background: var(--evergreen);
+}
+
+.preorder {
+  background: var(--tide);
+}
+
 .swatch {
   position: absolute;
   right: 0.7rem;

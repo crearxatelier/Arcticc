@@ -22,7 +22,15 @@ export function ProductCard({ product }: { product: Product }) {
       <Link href={`/products/${product.handle}`} className={styles.media}>
         {(product.badge || product.saleLabel) && (
           <span
-            className={`${styles.badge} ${product.badge === "sale" ? styles.sale : ""}`}
+            className={`${styles.badge} ${
+              product.badge === "sale"
+                ? styles.sale
+                : product.badge === "new"
+                  ? styles.new
+                  : product.badge === "preorder"
+                    ? styles.preorder
+                    : ""
+            }`}
           >
             {product.saleLabel || (product.badge && badgeLabel[product.badge])}
           </span>

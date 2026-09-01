@@ -94,7 +94,7 @@ export const products: Product[] = [
     flavor: "Berry",
     color: "#8B3A5C",
     image:
-      "https://images.unsplash.com/photo-1600271886742-f049cd7994ce?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&w=800&q=80",
     category: "Recovery",
     description:
       "Earthy beet meets wild blueberry and blackcurrant—built for post-movement recovery and quiet endurance.",
@@ -218,7 +218,7 @@ export const categories = [
     name: "Recovery",
     description: "Ruby blends for after you move.",
     image:
-      "https://images.unsplash.com/photo-1600271886742-f049cd7994ce?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1577805947697-89e18249d767?auto=format&fit=crop&w=1000&q=80",
   },
   {
     id: "calm",
