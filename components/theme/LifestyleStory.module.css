@@ -1,0 +1,60 @@
+.block {
+  display: grid;
+  min-height: min(72vh, 620px);
+}
+
+.media {
+  position: relative;
+  min-height: 320px;
+}
+
+.media img {
+  object-fit: cover;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  padding: clamp(2rem, 6vw, 4.5rem);
+}
+
+.copy h2 {
+  font-size: clamp(2.1rem, 4vw, 3.2rem);
+  max-width: 12ch;
+}
+
+.copy p:last-of-type {
+  max-width: 38ch;
+  margin-bottom: 0.5rem;
+}
+
+.mineral {
+  background: linear-gradient(160deg, #dfe8e2 0%, #c8d6cf 100%);
+  color: var(--ink);
+}
+
+.clay {
+  background: linear-gradient(160deg, #c47a6a 0%, #8f4f42 100%);
+  color: var(--white);
+}
+
+.tide {
+  background: linear-gradient(160deg, #3d8490 0%, #1f4f58 100%);
+  color: var(--white);
+}
+
+@media (min-width: 900px) {
+  .block {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .reverse .media {
+    order: 2;
+  }
+
+  .reverse .copy {
+    order: 1;
+  }
+}

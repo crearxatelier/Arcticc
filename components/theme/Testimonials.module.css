@@ -1,0 +1,57 @@
+.section {
+  background: transparent;
+}
+
+.head {
+  margin-bottom: var(--space-md);
+}
+
+.head h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-top: 0.35rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.quote {
+  margin: 0;
+  padding: 1.5rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.stars {
+  color: var(--star);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.85rem;
+  font-size: 0.85rem;
+}
+
+.quote p {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
+  line-height: 1.35;
+  margin-bottom: 1.25rem;
+}
+
+.quote footer {
+  display: flex;
+  gap: 0.55rem;
+  align-items: baseline;
+  font-size: 0.86rem;
+}
+
+.quote footer span {
+  color: var(--muted);
+}
+
+@media (min-width: 800px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
